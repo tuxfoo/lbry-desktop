@@ -128,8 +128,8 @@
     "husky": "^0.14.3",
     "json-loader": "^0.5.4",
     "lbry-format": "https://github.com/lbryio/lbry-format.git",
-    "lbry-redux": "lbryio/lbry-redux#2b3a5a59907f34d4e1c005c4696282b58d626242",
-    "lbryinc": "lbryio/lbryinc#f8bba34b34599a8450ced842b29336d1117d050d",
+    "lbry-redux": "lbryio/lbry-redux#83eb62801a860619f4483fb73bd368ba9cdfe42c",
+    "lbryinc": "lbryio/lbryinc#54d58414cea68685fa496d6164c64ce66b418223",
     "lint-staged": "^7.0.2",
     "localforage": "^1.7.1",
     "lodash-es": "^4.17.14",
@@ -204,8 +204,8 @@
     "yarn": "^1.3"
   },
   "lbrySettings": {
-    "lbrynetDaemonVersion": "0.40.1",
-    "lbrynetDaemonUrlTemplate": "https://github.com/lbryio/lbry/releases/download/vDAEMONVER/lbrynet-OSNAME.zip",
+    "lbrynetDaemonVersion": "0.41.0",
+    "lbrynetDaemonUrlTemplate": "http://build.lbry.io/daemon/build-12056_commit-11ec788_branch-wallet_id_based_api/lbrynet-OSNAME.zip",
     "lbrynetDaemonDir": "static/daemon",
     "lbrynetDaemonFileName": "lbrynet"
   }
