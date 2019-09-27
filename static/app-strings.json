@@ -705,9 +705,6 @@
   "You will no longer see this at startup": "You will no longer see this at startup",
   "URI does not include name.": "URI does not include name.",
   "to fix it. If that doesn't work, press CMD/CTRL-R to reset to the homepage.": "to fix it. If that doesn't work, press CMD/CTRL-R to reset to the homepage.",
-  "Add Email": "Add Email",
-  "Sign Out": "Sign Out",
-  "Follow more tags": "Follow more tags",
   "In response to a complaint we received under the US Digital Millennium Copyright Act, we have blocked access to this channel from our applications.": "In response to a complaint we received under the US Digital Millennium Copyright Act, we have blocked access to this channel from our applications.",
   "Read More": "Read More",
   "Subscribers": "Subscribers",
@@ -719,4 +716,8 @@
   "This will add a Support button along side tipping. Similar to tips, supports help %discovery_link% but the LBC is returned to your wallet if revoked. Both also help secure your %vanity_names_link%.": "This will add a Support button along side tipping. Similar to tips, supports help %discovery_link% but the LBC is returned to your wallet if revoked. Both also help secure your %vanity_names_link%.",
   "Save Password": "Save Password",
   "Automatically unlock your wallet on startup": "Automatically unlock your wallet on startup"
+  "Add Email": "Add Email",
+  "Sign Out": "Sign Out",
+  "Follow more tags": "Follow more tags",
+  "If you bid more than %amount% LBC, when someone navigates to %uri%, it will load your published content. However, you can get a longer version of this URL for any bid.": "If you bid more than %amount% LBC, when someone navigates to %uri%, it will load your published content. However, you can get a longer version of this URL for any bid."
 }
