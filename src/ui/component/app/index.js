@@ -1,7 +1,7 @@
 import * as SETTINGS from 'constants/settings';
 import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
-import { selectUser, doRewardList, doFetchRewardedContent, doFetchAccessToken } from 'lbryinc';
+import { selectUser, doRewardList, doFetchRewardedContent, doFetchAccessToken, selectUploadCount } from 'lbryinc';
 import { doFetchTransactions, doFetchChannelListMine } from 'lbry-redux';
 import { makeSelectClientSetting, selectThemePath } from 'redux/selectors/settings';
 import { selectIsUpgradeAvailable, selectAutoUpdateDownloaded } from 'redux/selectors/app';
@@ -14,6 +14,7 @@ const select = state => ({
   language: makeSelectClientSetting(SETTINGS.LANGUAGE)(state),
   autoUpdateDownloaded: selectAutoUpdateDownloaded(state),
   isUpgradeAvailable: selectIsUpgradeAvailable(state),
+  uploadCount: selectUploadCount(state),
 });
 
 const perform = dispatch => ({
