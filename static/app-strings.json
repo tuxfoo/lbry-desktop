@@ -791,5 +791,14 @@
   "channel": "channel",
   "Create": "Create",
   "You have no rewards available.": "You have no rewards available.",
-  "URL does not include name.": "URL does not include name."
+  "URL does not include name.": "URL does not include name.",
+  "Enter a LBRY URL or search for videos, music, games and more": "Enter a LBRY URL or search for videos, music, games and more",
+  "Subscriber": "Subscriber",
+  "This account must undergo review before you can participate in the rewards program.": "This account must undergo review before you can participate in the rewards program.",
+  "This can take anywhere from several minutes to several days.": "This can take anywhere from several minutes to several days.",
+  "We apologize for this inconvenience, but have added this additional step to prevent fraud.": "We apologize for this inconvenience, but have added this additional step to prevent fraud.",
+  "If you continue to see this message, send us an email to help@lbry.com.": "If you continue to see this message, send us an email to help@lbry.com.",
+  "Please enjoy free content in the meantime!": "Please enjoy free content in the meantime!",
+  "Claimed Rewards": "Claimed Rewards",
+  "This feature is not yet available for wallets with balances, but the gerbils are working on it.": "This feature is not yet available for wallets with balances, but the gerbils are working on it."
 }

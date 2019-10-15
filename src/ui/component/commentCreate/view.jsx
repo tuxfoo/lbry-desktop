@@ -89,6 +89,7 @@ export function CommentCreate(props: Props) {
               disabled={channel === CHANNEL_NEW || !commentValue.length}
               type="submit"
               label={__('Post')}
+              requiresAuth
             />
           </div>
         </Form>

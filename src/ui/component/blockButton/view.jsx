@@ -30,6 +30,7 @@ export default function BlockButton(props: Props) {
       icon={ICONS.BLOCK}
       button={'alt'}
       label={blockedOverride || blockLabel}
+      requiresAuth
       onClick={e => {
         e.stopPropagation();
         if (!channelIsBlocked) {
