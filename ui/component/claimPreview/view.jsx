@@ -17,6 +17,7 @@ import SubscribeButton from 'component/subscribeButton';
 import ChannelThumbnail from 'component/channelThumbnail';
 import BlockButton from 'component/blockButton';
 import Button from 'component/button';
+import { generateStreamUrl } from '../../util/lbrytv';
 
 type Props = {
   uri: string,
@@ -29,6 +30,7 @@ type Props = {
   isResolvingUri: boolean,
   history: { push: string => void },
   thumbnail: string,
+  mediaType: string,
   title: string,
   nsfw: boolean,
   placeholder: string,
@@ -62,6 +64,7 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
     isResolvingUri,
     thumbnail,
     title,
+    mediaType,
     nsfw,
     resolveUri,
     claim,
@@ -175,6 +178,14 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
     );
   }
 
+  const thumbnailUrl =
+    !thumbnail &&
+    mediaType === 'image' &&
+    claim &&
+    (!claim.value || !claim.value.fee || Number(claim.value.fee.amount) <= 0)
+      ? generateStreamUrl(claim.name, claim.claim_id, 'https://api.lbry.tv')
+      : thumbnail;
+
   return (
     <li
       ref={ref}
@@ -192,11 +203,12 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
       })}
     >
       {isChannel ? (
-          <UriIndicator uri={uri} link>
-            <ChannelThumbnail uri={uri} obscure={channelIsBlocked} />
-          </UriIndicator>
-      ) : (<CardMedia thumbnail={thumbnail} />)
-      }
+        <UriIndicator uri={uri} link>
+          <ChannelThumbnail uri={uri} obscure={channelIsBlocked} />
+        </UriIndicator>
+      ) : (
+        <CardMedia thumbnail={thumbnail} />
+      )}
       <div className="claim-preview-metadata">
         <div className="claim-preview-info">
           <div className="claim-preview-title">
