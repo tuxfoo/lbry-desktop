@@ -175,7 +175,6 @@ function ClaimListDiscover(props: Props) {
   );
 
   const noTags = (
-<<<<<<< HEAD
     <p>
       <I18nMessage
         tokens={{
@@ -185,19 +184,6 @@ function ClaimListDiscover(props: Props) {
         You're not following any tags. Add tags above or smash that %customize% button!
       </I18nMessage>
     </p>
-=======
-    <div>
-      <p>
-        <I18nMessage
-          tokens={{
-            customize: <Button button="link" navigate={`/$/${PAGES.FOLLOWING}`} label={__('customize')} />,
-          }}
-        >
-          You're not following any tags. Add tags above or smash that %customize% button!
-        </I18nMessage>
-      </p>
-    </div>
->>>>>>> i18n feedback
   );
 
   const noFollowing =

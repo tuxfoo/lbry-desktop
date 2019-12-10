@@ -54,6 +54,36 @@ type Props = {
   hideBlock?: boolean,
 };
 
+function useGetThumbnail(uri: string, claim: ?Claim, streamingUrl: ?String, getFile: uri => void) {
+  const hasClaim = Boolean(claim);
+  const isImage = hasClaim && claim.value && claim.value.stream_type === 'image';
+  const isFree = hasClaim && claim.value && (!claim.value.fee || Number(claim.value.fee.amount <= 0));
+  let thumbnailToUse;
+
+  // @if TARGET='web'
+  if (claim && isImage && isFree) {
+    thumbnailToUse = generateStreamUrl(claim.name, claim.claim_id, 'https://api.lbry.tv');
+  }
+  // @endif
+
+  const [thumbnail, setThumbnail] = React.useState(thumbnailToUse);
+  React.useEffect(() => {
+    setThumbnail(thumbnailToUse);
+  }, [thumbnailToUse]);
+
+  // @if TARGET='app'
+  React.useEffect(() => {
+    if (hasClaim && isImage && isFree && !streamingUrl) {
+      getFile(uri);
+    } else {
+      setThumbnail(streamingUrl);
+    }
+  }, [hasClaim, isFree, isImage, streamingUrl]);
+  // @endif
+
+  return thumbnail;
+}
+
 const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
   const {
     obscureNsfw,
@@ -82,6 +112,8 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
     properties,
     onClick,
     hideBlock,
+    getFile,
+    streamingUrl,
   } = props;
   const shouldFetch =
     claim === undefined || (claim !== null && claim.value_type === 'channel' && isEmpty(claim.meta) && !pending);
@@ -89,6 +121,7 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
   const claimsInChannel = (claim && claim.meta.claims_in_channel) || 0;
   const showPublishLink = abandoned && placeholder === 'publish';
   const hideActions = type === 'small' || type === 'tooltip';
+  const thumbnailUrl = useGetThumbnail(uri, claim, streamingUrl, getFile) || thumbnail;
 
   let name;
   let isValid = false;
@@ -178,14 +211,6 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
     );
   }
 
-  const thumbnailUrl =
-    !thumbnail &&
-    mediaType === 'image' &&
-    claim &&
-    (!claim.value || !claim.value.fee || Number(claim.value.fee.amount) <= 0)
-      ? generateStreamUrl(claim.name, claim.claim_id, 'https://api.lbry.tv')
-      : thumbnail;
-
   return (
     <li
       ref={ref}
@@ -207,7 +232,7 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
           <ChannelThumbnail uri={uri} obscure={channelIsBlocked} />
         </UriIndicator>
       ) : (
-        <CardMedia thumbnail={thumbnail} />
+        <CardMedia thumbnail={thumbnailUrl} />
       )}
       <div className="claim-preview-metadata">
         <div className="claim-preview-info">
