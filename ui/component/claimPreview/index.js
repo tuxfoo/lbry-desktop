@@ -46,7 +46,7 @@ const select = (state, props) => ({
 
 const perform = dispatch => ({
   resolveUri: uri => dispatch(doResolveUri(uri)),
-  getFile: uri => dispatch(doFileGet(uri)),
+  getFile: uri => dispatch(doFileGet(uri, false)),
   beginPublish: name => {
     dispatch(doClearPublish());
     dispatch(doPrepareEdit({ name }));
