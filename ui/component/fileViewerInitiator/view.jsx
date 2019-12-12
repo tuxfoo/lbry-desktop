@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import Button from 'component/button';
 import isUserTyping from 'util/detect-typing';
 import Yrbl from 'component/yrbl';
+import canAutoplay from 'can-autoplay';
 
 const SPACE_BAR_KEYCODE = 32;
 
@@ -88,7 +89,12 @@ export default function FileViewer(props: Props) {
   useEffect(() => {
     const videoOnPage = document.querySelector('video');
     if (autoplay && !videoOnPage && isAutoPlayable && hasCostInfo && cost === 0) {
-      viewFile();
+      canAutoplay.video().then(({ result }) => {
+        if (result === true) {
+          console.log('can yep');
+          viewFile();
+        }
+      });
     }
   }, [autoplay, viewFile, isAutoPlayable, hasCostInfo, cost]);
 

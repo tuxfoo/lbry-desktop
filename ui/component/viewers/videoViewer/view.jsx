@@ -22,7 +22,6 @@ const SEEK_STEP = 10; // time to seek in seconds
 
 const VIDEO_JS_OPTIONS: { poster?: string } = {
   controls: true,
-  autoplay: true,
   preload: 'auto',
   playbackRates: [0.25, 0.5, 0.75, 1, 1.1, 1.25, 1.5, 2],
   responsive: true,
@@ -45,7 +44,18 @@ type Props = {
 };
 
 function VideoViewer(props: Props) {
-  const { contentType, source, setPlayingUri, onEndedCB, changeVolume, changeMute, volume, muted, thumbnail } = props;
+  const {
+    contentType,
+    source,
+    setPlayingUri,
+    stopPlayingUri,
+    onEndedCB,
+    changeVolume,
+    changeMute,
+    volume,
+    muted,
+    thumbnail,
+  } = props;
   const videoRef = useRef();
   const isAudio = contentType.includes('audio');
   let forceTypes = [
@@ -111,9 +121,39 @@ function VideoViewer(props: Props) {
     }
 
     if (!requireRedraw) {
-      player = videojs(videoNode, videoJsOptions, function() {
+      player = videojs(videoNode, videoJsOptions);
+      player.ready(() => {
         player.volume(volume);
         player.muted(muted);
+
+        var promise = player.play();
+
+        // if (promise !== undefined) {
+        //   // Might have worked, the promise will reject if it ends up failing
+        //   // The browser might be extra sneaky and just let the promise sit in "pending" forever
+
+        //   let wasSuccessful = false;
+        //   promise
+        //     .then(() => {
+        //       console.log('playing');
+        //       wasSuccessful = true;
+        //     })
+        //     .catch(error => {
+        //       // Autoplay was prevented.
+        //       console.log('autoplay failed', error);
+        //       // stopPlayingUri();
+        //     });
+
+        //   setTimeout(() => {
+        //     if (!wasSuccessful) {
+        //       stopPlayingUri();
+        //     }
+        //   }, 5000);
+        // } else {
+        //   console.log('???');
+        //   // Older browser, just fallback to the play button
+        //   stopPlayingUri();
+        // }
       });
     }
 
@@ -129,7 +169,7 @@ function VideoViewer(props: Props) {
       // Then it's set to false immediately after so we can re-mount a new player
       setRequireRedraw(true);
     };
-  }, [videoRef, source, contentType, setRequireRedraw, requireRedraw]);
+  }, [videoRef, source, contentType, setRequireRedraw, requireRedraw, stopPlayingUri]);
 
   useEffect(() => {
     if (requireRedraw) {

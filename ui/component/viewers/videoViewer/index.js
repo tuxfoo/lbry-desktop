@@ -19,6 +19,7 @@ const perform = dispatch => ({
   savePosition: (uri, position) => dispatch(savePosition(uri, position)),
   changeMute: muted => dispatch(doChangeMute(muted)),
   setPlayingUri: uri => dispatch(doSetPlayingUri(uri)),
+  stopPlayingUri: () => dispatch(doSetPlayingUri(null)),
 });
 
 export default connect(
