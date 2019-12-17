@@ -201,25 +201,8 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
       <div className="claim-preview-metadata">
         <div className="claim-preview-info">
           <div className="claim-preview-title">
-            {claim ? <TruncatedText text={title || claim.name} lines={1} /> : <span>{__('Nothing here')}</span>}
+            {claim ? <TruncatedText text={title || claim.name} lines={2} /> : <span>{__('Nothing here')}</span>}
           </div>
-          {!pending && (
-            <React.Fragment>
-              {hideActions ? null : actions !== undefined ? (
-                actions
-              ) : (
-                <div className="card__actions--inline">
-                  {isChannel && !channelIsBlocked && !claimIsMine && (
-                    <SubscribeButton uri={uri.startsWith('lbry://') ? uri : `lbry://${uri}`} />
-                  )}
-                  {!hideBlock && isChannel && !isSubscribed && !claimIsMine && (
-                    <BlockButton uri={uri.startsWith('lbry://') ? uri : `lbry://${uri}`} />
-                  )}
-                  {!isChannel && claim && <FileProperties uri={uri} />}
-                </div>
-              )}
-            </React.Fragment>
-          )}
         </div>
 
         <div className="claim-preview-properties">
@@ -257,6 +240,23 @@ const ClaimPreview = forwardRef<any, {}>((props: Props, ref: any) => {
           </div>
           {properties !== undefined ? properties : <ClaimTags uri={uri} type={type} />}
         </div>
+        {!pending && (
+          <React.Fragment>
+            {hideActions ? null : actions !== undefined ? (
+              actions
+            ) : (
+              <div className="card__actions--inline">
+                {isChannel && !channelIsBlocked && !claimIsMine && (
+                  <SubscribeButton uri={uri.startsWith('lbry://') ? uri : `lbry://${uri}`} />
+                )}
+                {!hideBlock && isChannel && !isSubscribed && !claimIsMine && (
+                  <BlockButton uri={uri.startsWith('lbry://') ? uri : `lbry://${uri}`} />
+                )}
+                {!isChannel && claim && <FileProperties uri={uri} />}
+              </div>
+            )}
+          </React.Fragment>
+        )}
       </div>
     </li>
   );

@@ -2,6 +2,7 @@
 $spacing-vertical: 2rem;
 $spacing-width: 36px;
 
+$small-breakpoint: 800px;
 $medium-breakpoint: 1279px;
 $large-breakpoint: 1921px;
 
@@ -61,4 +62,15 @@ $large-breakpoint: 1921px;
   --file-list-thumbnail-width: 10rem;
 
   --tag-height: 1.5rem;
+}
+
+@media (max-width: $small-breakpoint) {
+  :root {
+    --font-base: 16px;
+    // --font-xsmall: 0.7344rem;
+    // --font-small: 0.8571rem;
+    // --font-large: 1.3rem;
+    // --font-title: 1.71rem;
+    // --font-heading: 2.94rem;
+  }
 }

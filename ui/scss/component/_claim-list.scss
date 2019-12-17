@@ -67,6 +67,15 @@
     flex-shrink: 0;
     margin-right: var(--spacing-medium);
   }
+
+  @media (max-width: $small-breakpoint) {
+    .media__thumb {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.1;
+      right: 0;
+    }
+  }
 }
 
 .claim-preview--large {
