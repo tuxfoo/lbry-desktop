@@ -23,3 +23,4 @@ exports.TAGS = 'tags';
 exports.WALLET = 'wallet';
 exports.BLOCKED = 'blocked';
 exports.CHANNELS = 'channels';
+exports.EMBED = 'embed';

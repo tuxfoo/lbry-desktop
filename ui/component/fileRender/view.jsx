@@ -29,6 +29,7 @@ type Props = {
   uri: string,
   mediaType: string,
   streamingUrl: string,
+  embedUrl?: string,
   contentType: string,
   claim: StreamClaim,
   currentTheme: string,
@@ -78,12 +79,23 @@ class FileRender extends React.PureComponent<Props> {
   }
 
   renderViewer() {
-    const { mediaType, currentTheme, claim, contentType, downloadPath, fileName, streamingUrl, uri } = this.props;
+    const {
+      mediaType,
+      currentTheme,
+      claim,
+      contentType,
+      downloadPath,
+      fileName,
+      streamingUrl,
+      embedUrl,
+      uri,
+    } = this.props;
     const fileType = fileName && path.extname(fileName).substring(1);
+    const streamUrl = embedUrl || streamingUrl;
 
     // Ideally the lbrytv api server would just replace the streaming_url returned by the sdk so we don't need this check
     // https://github.com/lbryio/lbrytv/issues/51
-    const source = IS_WEB ? generateStreamUrl(claim.name, claim.claim_id) : streamingUrl;
+    const source = IS_WEB ? generateStreamUrl(claim.name, claim.claim_id) : streamUrl;
 
     // Human-readable files (scripts and plain-text files)
     const readableFiles = ['text', 'document', 'script'];
@@ -184,8 +196,15 @@ class FileRender extends React.PureComponent<Props> {
     // Return viewer
     return viewer || unsupported;
   }
-
   render() {
+    const { embedUrl } = this.props;
+    if (embedUrl) {
+      return (
+        <div className="file-render__embed">
+          <Suspense fallback={<div />}>{this.renderViewer()}</Suspense>
+        </div>
+      );
+    }
     return (
       <div className="file-render">
         <Suspense fallback={<div />}>{this.renderViewer()}</Suspense>
